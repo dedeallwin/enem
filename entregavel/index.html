@@ -33,41 +33,55 @@
 
     <div class="max-w-xl w-full bg-gray-900 border border-gray-800 rounded-lg shadow-2xl shadow-green-500/10 p-8 md:p-10 text-center">
         
-        <!-- Ícone de Sucesso -->
         <div class="mx-auto bg-green-500 rounded-full h-16 w-16 flex items-center justify-center mb-5">
             <svg class="h-10 w-10 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
         </div>
 
-        <!-- Título Principal (Alterado) -->
         <h1 class="text-2xl md:text-3xl font-black text-white">
-            Compra Aprovada! Seus materiais <span class="gradient-text">estão prontos para download</span>.
+            Compra Aprovada! Seu download <span class="gradient-text">iniciará automaticamente</span>.
         </h1>
 
-        <!-- Mensagem de Confirmação -->
         <p class="mt-4 text-gray-400">
-            Parabéns por dar o próximo passo na sua aprovação!
+            Seus materiais estão sendo preparados. Permita múltiplos downloads se o navegador solicitar.
         </p>
 
         <div class="my-6 border-t border-gray-700"></div>
 
-        <!-- Instruções e Botões de Download (Alterado) -->
-        <p class="text-sm text-gray-500 mb-4">Clique nos botões abaixo para baixar cada um dos seus arquivos:</p>
+        <p class="text-sm text-gray-500">Se o download não começar, clique no botão abaixo:</p>
         
-        <!-- Botão para o Manual ENEM -->
-        <a href="Manual ENEM.pdf" download="Manual ENEM.pdf" class="download-button inline-block w-full px-8 py-3 bg-green-600 text-white font-bold text-base uppercase rounded-lg transition-transform">
-            BAIXAR MANUAL ENEM
-        </a>
-
-        <!-- Botão para TUDO ENEM 2025 -->
-        <a href="TUDO ENEM 2025.pdf" download="TUDO ENEM 2025.pdf" class="download-button inline-block mt-4 w-full px-8 py-3 bg-yellow-500 text-black font-bold text-base uppercase rounded-lg transition-transform">
-            BAIXAR TUDO ENEM 2025
-        </a>
+        <button onclick="downloadAllFiles()" class="download-button inline-block mt-4 w-full px-8 py-3 bg-green-600 text-white font-bold text-base uppercase rounded-lg transition-transform">
+            BAIXAR CONTEÚDO ENEM
+        </button>
 
     </div>
 
-    <!-- O SCRIPT DE DOWNLOAD AUTOMÁTICO FOI REMOVIDO, POIS NÃO É IDEAL PARA MÚLTIPLOS ARQUIVOS -->
+    <script>
+        // Função para criar e clicar em um link de download
+        function triggerDownload(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Função para baixar todos os arquivos
+        function downloadAllFiles() {
+            triggerDownload('Manual ENEM.pdf', 'Manual ENEM.pdf');
+            // Pequeno atraso para ajudar o navegador a processar
+            setTimeout(() => {
+                triggerDownload('TUDO ENEM 2025.pdf', 'TUDO ENEM 2025.pdf');
+            }, 500); // Meio segundo de atraso
+        }
+
+        // Tenta o download automático ao carregar a página
+        window.onload = function() {
+            setTimeout(downloadAllFiles, 1500); // 1.5 segundos de atraso
+        };
+    </script>
 
 </body>
 </html>
